@@ -34,7 +34,7 @@ import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
-public class ConcatExample {
+public class TestConcatExample {
   Random r = new Random();
 
   @Test
@@ -54,8 +54,8 @@ public class ConcatExample {
       Path root = new Path("/dir");
       fs.mkdirs(root);
 
-      short origRep = 2;
-      short secondRep = (short)(origRep + 1);
+      short origRep = 3;
+      short secondRep = (short)(origRep - 1);
       Path f1 = new Path("/dir/f1");
       long size1 = writeFile(fs, f1, /* blocksize */ 4096, origRep, 5);
       long f1NumBlocks = fs.getFileBlockLocations(f1, 0, size1).length;
@@ -108,7 +108,6 @@ public class ConcatExample {
     os.close();
     FileStatus fileStatus = fs.getFileStatus(p);
     long f1Len = fileStatus.getLen();
-    //int f1NumBlocks = fs.getFileBlockLocations(fileStatus, 0, f1Len).length;
 
     assertEquals(i, f1Len);
 
